@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1066755795087",
+    "firebase_url": "https://buystuff-828f5.firebaseio.com",
+    "project_id": "buystuff-828f5",
+    "storage_bucket": "buystuff-828f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066755795087:android:6c6a8de951774c3eb168fa",
+        "android_client_info": {
+          "package_name": "com.buystuff.buystuff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066755795087-8cva2i3ju8grog57406pvsvvdr0atd18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs2F1-0r_SE1Xx0dGYweHj6zp9KRfrHGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066755795087-8cva2i3ju8grog57406pvsvvdr0atd18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1066755795087-rub5aft0pfcm75hv3c8s1m0l0evldbun.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.buystuff.buystuff"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
