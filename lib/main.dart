@@ -1,5 +1,6 @@
 import 'package:buystuff/cache/singletons.dart';
 import 'package:buystuff/groups/new_group.dart';
+import 'package:buystuff/groups/shopping.dart';
 import 'file:///C:/Users/Bartek/AndroidStudioProjects/buy_stuff/lib/groups/group.dart';
 import 'package:buystuff/home_screen.dart';
 import 'package:buystuff/login/login_main.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         LoginMain.routeName: (context) => LoginMain(),
         RegisterMain.routeName: (context) => RegisterMain(),
         GroupMain.routeName: (context) => GroupMain(),
+        GroupShopping.routeName: (context) => GroupShopping(),
         AddGroup.routeName: (context) => AddGroup(),
       },
     );

@@ -1,7 +1,9 @@
 
 
 import 'package:buystuff/cache/singletons.dart';
+import 'package:buystuff/groups/shopping.dart';
 import 'package:buystuff/home_screen.dart';
+import 'package:buystuff/templates/templates.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -209,24 +211,37 @@ class _GroupMainState extends State<GroupMain>{
                 backgroundColor: palette.map[groups.groupsMap[groupId].style['color']],
                 splashColor: Colors.black,
                 onPressed: (){
-                  //todo tryb zakupów
+                  Navigator.of(context).pushNamed(GroupShopping.routeName, arguments: groupId).then((value) => setState((){}));
                 },
                 child: Icon(Icons.shopping_cart, size: 32, color: Colors.white,),
               ),
             ),
             Positioned(
-              bottom: 20,
-              left: 20,
-              child: FloatingActionButton(
-                elevation: 4,
-                backgroundColor: palette.map[groups.groupsMap[groupId].style['color']],
-                splashColor: Colors.black,
+              top: 35,
+              left: 10,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                color: Colors.grey,
+                iconSize: 32,
                 onPressed: (){
-                  //todo requests 
+                  Navigator.of(context).pop();
                 },
-                child: Icon(Icons.message, size: 32, color: Colors.white,),
               ),
+
             )
+//            Positioned(
+//              bottom: 20,
+//              left: 80,
+//              child: FloatingActionButton(
+//                elevation: 4,
+//                backgroundColor: palette.map[groups.groupsMap[groupId].style['color']],
+//                splashColor: Colors.black,
+//                onPressed: (){
+//                  //todo requests
+//                },
+//                child: Icon(Icons.message, size: 32, color: Colors.white,),
+//              ),
+//            )
           ],
         ),
       ),
@@ -236,27 +251,3 @@ class _GroupMainState extends State<GroupMain>{
 }
 
 
-class DrawCircle extends CustomPainter {
-  Paint _paint;
-  double radius;
-  Color circleColor;
-
-
-  DrawCircle(this.circleColor, {this.radius = 13}) {
-
-    _paint = Paint()
-      ..color = circleColor
-      ..style = PaintingStyle.fill;
-  }
-
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawCircle(Offset(0.5,0.5), radius, _paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}

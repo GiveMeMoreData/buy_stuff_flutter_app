@@ -2,6 +2,7 @@
 import 'package:buystuff/cache/singletons.dart';
 import 'package:buystuff/groups/group.dart';
 import 'package:buystuff/home_screen.dart';
+import 'package:buystuff/templates/templates.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,10 +49,15 @@ class _AddGroupState extends State<AddGroup>{
     final _circleRadious = 35.0;
     return GestureDetector(
       child: Container(
-        color: Colors.grey,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(_circleRadious),
+        ),
         width: 2.5*_circleRadious,
         height: 2.5*_circleRadious,
-        child: Center(child: CustomPaint(painter: DrawCircle(colorsMap.values.toList()[index], radius: _circleRadious),)),
+        child: Center(
+          child: CustomPaint(painter: DrawCircle(colorsMap.values.toList()[index], radius: _circleRadious),
+          ),
+        ),
       ),
       onTap: (){
         print("color changed");
@@ -90,6 +96,7 @@ class _AddGroupState extends State<AddGroup>{
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
+          alignment: Alignment.bottomCenter,
           children: <Widget>[
             Container(
                 width: MediaQuery.of(context).size.width,
@@ -177,7 +184,7 @@ class _AddGroupState extends State<AddGroup>{
                           decoration: InputDecoration.collapsed(
                             hintText: "Dodaj opis...",
                             hintStyle: TextStyle(
-                              color: Colors.black87,
+                              color: Colors.black54,
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                             )
@@ -198,13 +205,15 @@ class _AddGroupState extends State<AddGroup>{
                       ),
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height*0.1,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: colorsMap.keys.toList().length,
-                        itemBuilder: (_, int index){
-                          return CircularColorChoice(index);
-                        },
+                      height: MediaQuery.of(context).size.height*0.15,
+                      child: Center(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: colorsMap.keys.toList().length,
+                          itemBuilder: (_, int index){
+                            return CircularColorChoice(index);
+                          },
+                        ),
                       ),
                     )
                   ],

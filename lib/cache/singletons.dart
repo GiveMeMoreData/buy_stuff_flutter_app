@@ -73,6 +73,21 @@ abstract class GroupListBase{
     }
   }
 
+  void addNeed(String need, String importance){
+
+  }
+  void removeNeed(String groupId,String need, String importance){
+    groupsMap[groupId].needs[importance].remove(need);
+  }
+
+  void removeNeedsFromMap(String groupId, Map updateData){
+    for(String _importance in updateData.keys.toList()){
+      for (String _need in updateData[_importance]){
+        removeNeed(groupId, _need, _importance);
+      }
+    }
+  }
+
   void addGroupFromAddData(String groupId, Map addData){
     groupsMap.putIfAbsent(groupId, () => new Group(addData['name'], addData['users'], addData['created'], addData['needs'], addData['style']));
   }
