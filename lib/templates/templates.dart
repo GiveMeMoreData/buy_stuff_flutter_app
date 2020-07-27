@@ -52,3 +52,19 @@ class DrawRing extends CustomPainter {
     return true;
   }
 }
+
+
+
+class ColorsPalette {
+  final map = {
+    "black" : Colors.black,
+    "yellow" : Colors.yellowAccent,
+    "red" : Colors.red,
+    "orange" : Colors.orange,
+    "green" : Colors.green,
+    "cyan" : Colors.cyan,
+    "lightBlue" : Colors.lightBlue,
+    "purple" : Colors.purple,
+    "pink" : Colors.pink,
+  };
+}

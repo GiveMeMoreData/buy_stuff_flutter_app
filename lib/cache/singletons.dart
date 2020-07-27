@@ -19,11 +19,6 @@ class Group{
   @protected
   Map style;
 
-
-
-
-
-
   void setName(String newDeviceName) {
     name = newDeviceName;
   }
@@ -113,15 +108,128 @@ class GroupListState extends GroupListBase {
 }
 
 
-class ColorsPalette {
-  final map = {
-    "black" : Colors.black,
-    "yellow" : Colors.yellowAccent,
-    "red" : Colors.red,
-    "green" : Colors.green,
-    "cyan" : Colors.cyan,
-    "lightBlue" : Colors.lightBlue,
-    "purple" : Colors.purple,
-    "pink" : Colors.pink,
-  };
+class Party{
+
+  @protected
+  String name;
+
+  @protected
+  String inviteCode;
+
+  @protected
+  DateTime created;
+
+  @protected
+  Map usersMap;
+
+  @protected
+  Map info;
+
+  @protected
+  Map needs;
+
+  @protected
+  Map style;
+
+  void setName(String newDeviceName) {
+    name = newDeviceName;
+  }
+  void setUsers(Map newUsers){
+    usersMap = newUsers;
+  }
+  void addUser(String newUserId){
+    usersMap.putIfAbsent(newUserId, () => []);
+  }
+
+  void setNeeds(Map newNeeds){
+    needs = newNeeds;
+  }
+
+  void addNeed(int importance, String needName){
+    needs[importance].add(needName);
+  }
+  void setStyle(Map newStyle){
+    style = newStyle;
+  }
+
+  Party({this.name, this.inviteCode, this.created, this.usersMap, this.info, this.needs, this.style});
 }
+
+
+abstract class PartyListBase{
+
+  @protected
+  Map<String,Party> partiesMap;
+
+  @protected
+  Map<String,Party> initialPartiesMap;
+
+
+  Map<String,Party> get currentPartiesMap => partiesMap;
+
+  void setPartiesMapFromDocumentSnapshotList(List<DocumentSnapshot> newParties){
+    restart();
+    for(DocumentSnapshot party in newParties){
+      partiesMap.putIfAbsent(party.documentID, () =>  new Party(
+          name: party['name'],
+          inviteCode: party['invite_code'],
+          created: DateTime.fromMillisecondsSinceEpoch(party['created'].millisecondsSinceEpoch),
+          usersMap: party['users_map'],
+          info: party['info'],
+          needs: party['needs'],
+          style: party['style']
+      ));
+    }
+  }
+
+  void addNeed(String partyId, String need, String importance){
+    partiesMap[partyId].needs[importance].add(need);
+  }
+  void removeNeed(String partyId, String need, String importance){
+    partiesMap[partyId].needs[importance].remove(need);
+  }
+
+  void removeNeedsFromMap(String partyId, Map updateData){
+    for(String _importance in updateData.keys.toList()){
+      for (String _need in updateData[_importance]){
+        removeNeed(partyId, _need, _importance);
+      }
+    }
+  }
+
+  void addPartyFromAddData(String partyId, Map addData){
+    partiesMap.putIfAbsent(partyId, () => new Party(
+        name: addData['name'],
+        inviteCode: generateInviteCode(),
+        created: addData['created'],
+        usersMap: addData['users'],
+        info: addData['info'],
+        needs: addData['needs'],
+        style: addData['style']));
+  }
+
+
+  String generateInviteCode(){
+    return "aaaaaa";
+  }
+
+  void restart() {
+    initialPartiesMap = {};
+    partiesMap = initialPartiesMap;
+  }
+}
+
+
+class PartyListState extends PartyListBase {
+  static final PartyListState _instance = PartyListState._internal();
+
+  factory PartyListState() {
+    return _instance;
+  }
+
+  PartyListState._internal() {
+    initialPartiesMap = {};
+    partiesMap = initialPartiesMap;
+  }
+}
+

@@ -34,6 +34,7 @@ dependencies:
   firebase_analytics: ^5.0.11
   firebase_auth: ^0.16.0
   cloud_firestore: ^0.13.5
+  firebase_storage: ^3.1.6
   scrollable_positioned_list: ^0.1.6
 
 dev_dependencies:

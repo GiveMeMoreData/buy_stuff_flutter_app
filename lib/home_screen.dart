@@ -1,8 +1,10 @@
 
 import 'package:buystuff/cache/singletons.dart';
 import 'package:buystuff/groups/new_group.dart';
+import 'package:buystuff/party/new_party.dart';
+import 'package:buystuff/party/parties.dart';
+import 'package:buystuff/templates/templates.dart';
 import 'file:///C:/Users/Bartek/AndroidStudioProjects/buy_stuff/lib/groups/group.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,9 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Firestore firestore = Firestore.instance;
 
   final GroupListBase groups = GroupListState();
+  final PartyListBase parties = PartyListState();
   final ColorsPalette palette = ColorsPalette();
-
-  List<PartyArguments> parties= [];
 
 
 @override
@@ -121,27 +122,32 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.23),
-                itemCount: 1,
+                itemCount: parties.partiesMap.keys.toList().length+1,
                 itemBuilder: (context, int index){
-                  if (index == 0){
+                  if (index == parties.partiesMap.keys.toList().length){
                     return Padding(
                       padding: const EdgeInsets.only(right: 50),
-                      child: Container(
-                        width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(78, 0xDF, 0xDF, 0xDF),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 20),
-                          child: Center(
-                            child: Text(
-                              "Dodaj nową\nimprezę",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pushNamed(AddParty.routeName).then((value) => setState((){}));
+                        },
+                        child: Container(
+                          width: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.lightBlueAccent,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20,right: 20),
+                            child: Center(
+                              child: Text(
+                                "Nowa\ngrupa",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -151,20 +157,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else {
                     return Padding(
                       padding: const EdgeInsets.only(right: 50),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color.fromARGB(78, 0xDF, 0xDF, 0xDF),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 20),
-                          child: Center(
-                            child: Text(
-                              parties[index].name,
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pushNamed(PartyMain.routeName,
+                            arguments: parties.partiesMap.keys.toList()[index],
+                          ).then((value) => setState((){}));
+                        },
+                        child: Container(
+                          width: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: palette.map[parties.partiesMap.values.toList()[index].style['color']],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20,right: 20),
+                            child: Center(
+                              child: Text(
+                                parties.partiesMap.values.toList()[index].name,
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

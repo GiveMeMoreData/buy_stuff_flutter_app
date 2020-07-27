@@ -4,6 +4,8 @@ import 'package:buystuff/groups/shopping.dart';
 import 'file:///C:/Users/Bartek/AndroidStudioProjects/buy_stuff/lib/groups/group.dart';
 import 'package:buystuff/home_screen.dart';
 import 'package:buystuff/login/login_main.dart';
+import 'package:buystuff/party/new_party.dart';
+import 'package:buystuff/party/parties.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         GroupMain.routeName: (context) => GroupMain(),
         GroupShopping.routeName: (context) => GroupShopping(),
         AddGroup.routeName: (context) => AddGroup(),
+        PartyMain.routeName: (context) => PartyMain(),
+        AddParty.routeName: (context) => AddParty(),
       },
     );
   }
@@ -45,6 +49,7 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
 
   final GroupListBase groups = GroupListState();
+  final PartyListBase parties = PartyListState();
 
   Future loadCurrentUser() async {
     final currentUser = await FirebaseAuth.instance.currentUser();
@@ -54,7 +59,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       Navigator.pushNamed(context, LoginMain.routeName);
     } else {
       await loadGroups(currentUser.uid);
-      loadParties(currentUser.uid);
+      await loadParties(currentUser.uid);
       loadRequests(currentUser.uid);
       Navigator.pop(context);
       Navigator.pushNamed(context, HomeScreen.routeName);
@@ -67,7 +72,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     groups.setGroupsMapFromDocumentSnapshotList(query.documents);
   }
 
-  void loadParties(String userId){
+  Future<Null> loadParties(String userId) async {
+    final query = await Firestore.instance.collection('parties').where('users', arrayContains: userId).getDocuments();
+    parties.setPartiesMapFromDocumentSnapshotList(query.documents);
 
   }
 
