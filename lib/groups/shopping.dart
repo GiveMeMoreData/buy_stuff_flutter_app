@@ -59,6 +59,7 @@ class _GroupShoppingState extends State<GroupShopping>{
 
 
     groups.removeNeedsFromMap(groupId, updateData);
+    updateNeeds();
   }
 
   String getNeed(int index){

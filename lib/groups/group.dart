@@ -139,16 +139,14 @@ class _GroupMainState extends State<GroupMain>{
                                               fontWeight: FontWeight.w500,
                                             ),
                                         ),
-                                        onTap: (){
-                                        },
                                         onChanged: (newProductText){
                                           newNeed = newProductText;
                                         },
-                                        onEditingComplete: (){
+                                        onSubmitted: (_){
                                           needsThree.add(newNeed);
-                                          groups.groupsMap[groupId].needs["3"].add(newNeed);
                                           addNeedToDatabse();
                                           newNeed = null;
+
                                         },
                                         style: TextStyle(
                                           color: Colors.black54,
