@@ -33,6 +33,8 @@ class MyApp extends StatelessWidget {
         GroupMain.routeName: (context) => GroupMain(),
         GroupShopping.routeName: (context) => GroupShopping(),
         AddGroup.routeName: (context) => AddGroup(),
+        CreateGroup.routeName: (context) => CreateGroup(),
+        FindGroup.routeName: (context) => FindGroup(),
         PartyMain.routeName: (context) => PartyMain(),
         AddParty.routeName: (context) => AddParty(),
       },

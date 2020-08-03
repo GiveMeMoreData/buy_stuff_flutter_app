@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.only(left: 20,right: 20),
                             child: Center(
                               child: Text(
-                                "Nowa\ngrupa",
+                                "Dodaj\ngrupę",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 28,
