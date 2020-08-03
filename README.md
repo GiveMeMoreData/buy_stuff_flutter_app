@@ -1,16 +1,18 @@
-# buystuff
+# BuyStaff
 
-A new Flutter application.
+**Useful and simple application for managing shopping list for your groups, parties and meetings.**
 
-## Getting Started
+### Things you should know
+This is my project, currently non commercial. The aim is to build stable version and publish it to both Google Play and iOS App Store. Feel free to clone project and temper with it and if you do plase send back your feedback.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Finished 
+ * Creating groups
+ * Adding products and shopping view
+ * Creating accounts and loging in secure way
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Currently in works
+* Email verification
+* Parties
+* Editing groups and parties
+* Invites logic
