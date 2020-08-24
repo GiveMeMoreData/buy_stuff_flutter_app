@@ -10,9 +10,9 @@ This is my project, currently non commercial. The aim is to build stable version
  * Creating groups
  * Adding products and shopping view
  * Creating accounts and loging in secure way
+ * Parties
+ * Invites logic
 
 ## Currently in works
 * Email verification
-* Parties
 * Editing groups and parties
-* Invites logic
